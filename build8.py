@@ -19,3 +19,14 @@ for root, _, files in os.walk(OUT):
             open(p, 'w', encoding='utf-8').write(t.replace(OLD, NEW))
             n += 1
 print(f'booking links rewritten in {n} file(s)')
+
+# Make the booking-engine mention in the FAQ answer a clickable link (visible HTML only, not JSON-LD).
+A = '<p>Book directly on our booking engine at booknow.accelgroup.asia/book:'
+B = '<p>Book directly on our booking engine at <a href="https://booknow.accelgroup.asia/book">booknow.accelgroup.asia/book</a>:'
+for root, _, files in os.walk(OUT):
+    for f in files:
+        if f.endswith('.html'):
+            p = os.path.join(root, f)
+            t = open(p, encoding='utf-8').read()
+            if A in t:
+                open(p, 'w', encoding='utf-8').write(t.replace(A, B))

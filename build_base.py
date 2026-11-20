@@ -72,7 +72,7 @@ RES = [
 BY = {r['slug']: r for r in RES}
 
 HOME_FAQ = [
- ("How do I book an Accel Collection residence?", "Choose a residence, your dates and the number of guests in the booking panel, then send your request on WhatsApp or by email. Your host replies personally to confirm availability. Nothing is charged when you send a request."),
+ ("How do I book an Accel Collection residence?", "Book directly on our booking engine at booknow.accelgroup.asia/book: choose a residence, your dates and the number of guests. Or use the booking panel to send a request on WhatsApp or by email, and your host replies personally to confirm availability. Nothing is charged when you send a request."),
  ("What is included with every stay?", "Every residence is hosted. Stays come with a personal host and private housekeeping, and a private chauffeur from Kuala Lumpur can be arranged (on request at Rompin House). Private dining, such as the Chef's Table at The Mansion, can be arranged with your host."),
  ("Is Accel Collection like an Airbnb?", "You stay in a private residence rather than a hotel room, as you would with a holiday rental. The difference is that every Accel Collection residence is hosted and serviced, so the house is prepared before you arrive and run for you throughout your stay."),
  ("What can we do during our stay?", "Guests who love golf can spend a day at the Awana Genting golf course at Dani Hill. Across the Collection we arrange recovery and rejuvenation sessions with our skilled masseur, and your host can run daily activity workshops on request."),
