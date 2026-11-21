@@ -36,7 +36,7 @@ os.makedirs(os.path.join(OUT, 'img'), exist_ok=True)
 for n in ('host', 'housekeeping', 'chauffeur', 'experiences'):
     shutil.copy(os.path.join(HERE, 'svc', n + '.avif'), os.path.join(OUT, 'img', 'svc-' + n + '.avif'))
 PHOTOS = {
- 'Personal Host': ('/img/svc-host.avif', 'A smiling host welcoming a guest at the reception desk'),
+ 'Personal Host': ('/img/svc-host.avif', 'Your host serving afternoon tea and dessert to guests in a sunlit garden lounge'),
  'Private Housekeeping': ('/img/svc-housekeeping.avif', 'Housekeeping smoothing a quilted throw on a freshly made bed'),
  'Private Chauffeur': ('/img/svc-chauffeur.avif', 'A chauffeur holding the car door open for a guest'),
  'Private Dining Chef': (SAN+'5cf56df07a951d4bfe08faaa91353bf18411e2ca-720x1280.jpg?w=640&h=640&fit=crop&crop=bottom&q=80&auto=format', 'The dining hall at The Mansion, laid for a private dinner'),
