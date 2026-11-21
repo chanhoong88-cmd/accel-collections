@@ -34,9 +34,12 @@ WA_NEXT = f'https://wa.me/{WA}?text=' + q("Hello, please let me know when the ne
 os.makedirs(os.path.join(OUT, 'img', 'exp'), exist_ok=True)
 ALTS = ['A violinist on the grand staircase at The Mansion', "Guests seated for dinner in The Mansion's dining hall",
         "Grilled squid with a green chilli sauce, plated for the Chef's Table", "A tartare course with a dried pineapple flower and seeded cracker"]
-POS = ['62% 55%', '70% 60%', '40% 55%', '55% 50%']
+POS = ['62% 55%', '50% 47%', '40% 55%', '55% 50%']
+# Display order: staircase (large), the two dishes side by side, dining hall (wide)
+ORDER = [1, 3, 4, 2]
 slots = []
-for i, alt in enumerate(ALTS, 1):
+for i in ORDER:
+    alt = ALTS[i-1]
     src = os.path.join(HERE, 'svc', 'exp', f'evening-{i}.avif')
     cls = 'x-ph x-ph-lead' if i == 1 else 'x-ph'
     if os.path.exists(src):
