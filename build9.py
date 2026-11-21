@@ -27,6 +27,7 @@ MAIL_RSVP = f'mailto:{EMAIL}?subject=' + q('RSVP: An Evening at Dani Hill') + '&
 PRIV_MSG = "Hello, I'd like to arrange a private experience for my group.\nExperience:\nPreferred date:\nNumber of guests:"
 WA_PRIV = f'https://wa.me/{WA}?text=' + q(PRIV_MSG)
 MAIL_PRIV = f'mailto:{EMAIL}?subject=' + q('Private experience enquiry') + '&body=' + q(PRIV_MSG)
+WA_TT = f'https://wa.me/{WA}?text=' + q("Hello, I'd like to RSVP early for Tiles & Tea at The Mansion.\nName:\nNumber of guests:")
 WA_NEXT = f'https://wa.me/{WA}?text=' + q("Hello, please let me know when the next Accel Collection experience is announced.")
 
 # ---- photo slots ----
@@ -62,7 +63,7 @@ MAIN = f'''<main id="top">
     <div class="wrap">
       <div class="x-grid">
         <div class="rv">
-          <div class="eyebrow">Experience 01 · Dani Hill · The Mansion</div>
+          <div class="eyebrow">Dani Hill · The Mansion</div>
           <h2>An evening <em>in the house.</em></h2>
           <p>An evening at The Mansion for twenty guests. It begins at 5pm with a violin performance on the grand staircase. At 6pm, dinner is served by candlelight at the Chef&#x27;s Table in the dining hall, with a menu cooked by a guest chef who changes each season.</p>
           <ol class="x-prog">
@@ -104,8 +105,8 @@ MAIN = f'''<main id="top">
         <p>New experiences are added through the year. Each is hosted at an Accel Collection residence, with seats limited to a small group.</p>
       </div>
       <div class="x-soon">
-        <div class="who-card rv"><div class="eyebrow">Experience 02</div><h3>Coming soon</h3><p>Details, venue and dates to be announced.</p><a href="{e(WA_NEXT)}" target="_blank" rel="noopener">Be the first to hear →</a></div>
-        <div class="who-card rv"><div class="eyebrow">Experience 03</div><h3>Coming soon</h3><p>Details, venue and dates to be announced.</p><a href="{e(WA_NEXT)}" target="_blank" rel="noopener">Be the first to hear →</a></div>
+        <div class="who-card rv"><div class="eyebrow">Dani Hill · The Mansion · Details coming soon</div><h3>Tiles &amp; Tea <em>at The Mansion.</em></h3><p>A Cantonese supper club for twenty guests. Chinese tea and dim sum are served in rounds, followed by mahjong late into the evening. Full details coming soon. RSVP early for early-bird perks.</p><a href="{e(WA_TT)}" target="_blank" rel="noopener">RSVP early on WhatsApp →</a></div>
+        <div class="who-card rv"><div class="eyebrow">To be announced</div><h3><em>Coming soon.</em></h3><p>Details, venue and dates to be announced.</p><a href="{e(WA_NEXT)}" target="_blank" rel="noopener">Be the first to hear →</a></div>
       </div>
     </div>
   </section>
@@ -146,7 +147,8 @@ CSS = '''<style>
 .x-next{padding-top:clamp(64px,8vw,110px)}
 .x-soon{display:grid;grid-template-columns:1fr 1fr;gap:28px}
 .x-soon .who-card{display:flex;flex-direction:column}
-.x-soon .who-card h3{font-size:clamp(28px,2.6vw,36px);margin:12px 0 8px;font-style:italic}
+.x-soon .who-card h3{font-size:clamp(28px,2.6vw,36px);margin:12px 0 8px}
+.x-soon .who-card h3 em{font-style:italic}
 .x-soon .who-card a{margin-top:auto;padding-top:18px;align-self:flex-start}
 @media (max-width:900px){
 .x-grid,.x-soon{grid-template-columns:1fr}
