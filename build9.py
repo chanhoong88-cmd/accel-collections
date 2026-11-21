@@ -31,27 +31,29 @@ WA_NEXT = f'https://wa.me/{WA}?text=' + q("Hello, please let me know when the ne
 
 # ---- photo slots ----
 os.makedirs(os.path.join(OUT, 'img', 'exp'), exist_ok=True)
-ALTS = ['The grand staircase at The Mansion, Dani Hill', 'Violin performance on the grand staircase',
-        "Guests at the candlelit Chef's Table", "A course from the guest chef's menu"]
+ALTS = ['A violinist on the grand staircase at The Mansion', "Guests seated for dinner in The Mansion's dining hall",
+        "Grilled squid with a green chilli sauce, plated for the Chef's Table", "A tartare course with a dried pineapple flower and seeded cracker"]
+POS = ['62% 55%', '70% 60%', '40% 55%', '55% 50%']
 slots = []
 for i, alt in enumerate(ALTS, 1):
     src = os.path.join(HERE, 'svc', 'exp', f'evening-{i}.avif')
     cls = 'x-ph x-ph-lead' if i == 1 else 'x-ph'
     if os.path.exists(src):
         shutil.copy(src, os.path.join(OUT, 'img', 'exp', f'evening-{i}.avif'))
-        slots.append(f'<figure class="{cls} has-img"><img src="/img/exp/evening-{i}.avif" alt="{e(alt)}" loading="lazy"></figure>')
+        slots.append(f'<figure class="{cls} has-img"><img src="/img/exp/evening-{i}.avif" alt="{e(alt)}" loading="lazy" style="object-position:{POS[i-1]}"></figure>')
     else:
         slots.append(f'<figure class="{cls}" aria-hidden="true"><span>Photo to come</span></figure>')
 gallery = '\n          '.join(slots)
+shutil.copy(os.path.join(HERE, 'svc', 'exp', 'hero.avif'), os.path.join(OUT, 'img', 'exp', 'hero.avif'))
 
 MAIN = f'''<main id="top">
   <section class="r-hero x-hero">
-    <div class="hero-bg"><img src="{HERO}?w=1600&q=80&auto=format" srcset="{HERO}?w=800&q=80&auto=format 800w, {HERO}?w=1600&q=80&auto=format 1600w" sizes="100vw" alt="The Mansion at Dani Hill, Genting Highlands" width="1600" height="1067" fetchpriority="high" decoding="async"></div>
+    <div class="hero-bg"><img src="/img/exp/hero.avif" alt="The Mansion at Dani Hill at sunset, Genting Highlands" width="1536" height="1024" fetchpriority="high" decoding="async"></div>
     <div class="wrap">
       <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Accel Collection</a> · <span>Curated Experiences</span></nav>
       <h1>Curated <em>Experiences.</em></h1>
-      <div class="r-tag">Hosted evenings across the Collection.</div>
-      <div class="r-facts"><span>Small tables</span><span>Hosted by our team</span><span>Private sessions on request</span></div>
+      <div class="r-tag">Hosted evenings at our residences.</div>
+      <div class="r-facts"><span>Limited seats</span><span>Hosted by our team</span><span>Private sessions on request</span></div>
       <a class="btn btn-gold" href="#evening">See the first experience</a>
     </div>
   </section>
@@ -62,11 +64,11 @@ MAIN = f'''<main id="top">
         <div class="rv">
           <div class="eyebrow">Experience 01 · Dani Hill · The Mansion</div>
           <h2>An evening <em>in the house.</em></h2>
-          <p>An evening at The Mansion for twenty guests. It opens at 5pm with a violin performance from the grand staircase, followed at 6pm by a candlelit Chef&#x27;s Table dinner in the dining hall. Each season, a guest chef joins our kitchen to cook the menu.</p>
+          <p>An evening at The Mansion for twenty guests. It begins at 5pm with a violin performance on the grand staircase. At 6pm, dinner is served by candlelight at the Chef&#x27;s Table in the dining hall, with a menu cooked by a guest chef who changes each season.</p>
           <ol class="x-prog">
-            <li><span class="x-time">05:00 <small>pm</small></span><span>The violin, <em>from the grand staircase.</em></span></li>
+            <li><span class="x-time">05:00 <small>pm</small></span><span>Violin, <em>on the grand staircase.</em></span></li>
             <li><span class="x-time">06:00 <small>pm</small></span><span>Dinner for twenty, <em>by candlelight.</em></span></li>
-            <li><span class="x-time x-season">Seasonal</span><span>A guest chef, <em>every season.</em></span></li>
+            <li><span class="x-time x-season">Each season</span><span>A guest chef, <em>a new menu.</em></span></li>
           </ol>
         </div>
         <div class="rv">
@@ -74,12 +76,12 @@ MAIN = f'''<main id="top">
             <div><dt>Venue</dt><dd>The Mansion, Dani Hill, Genting Highlands</dd></div>
             <div><dt>Time</dt><dd>From 5pm</dd></div>
             <div><dt>Guests</dt><dd>Twenty seats</dd></div>
-            <div><dt>Included</dt><dd>Violin performance · Chef&#x27;s Table dinner</dd></div>
+            <div><dt>Included</dt><dd>Violin performance · Chef&#x27;s Table dinner by a guest chef</dd></div>
             <div><dt>Dates</dt><dd>Check with us for the next available date</dd></div>
           </dl>
           <div class="x-rsvp">
             <div class="eyebrow">RSVP with us</div>
-            <p>Send your name, number of guests and preferred date. Your host replies personally to confirm your seats.</p>
+            <p>Send your name, number of guests and preferred date. Your host confirms your seats personally, usually within the day.</p>
             <div class="btn-row"><a class="btn btn-gold" href="{e(WA_RSVP)}" target="_blank" rel="noopener">RSVP on WhatsApp</a><a class="btn btn-line" href="{e(MAIL_RSVP)}">RSVP by email</a></div>
             <small>WhatsApp {WA_D} · {EMAIL}</small>
           </div>
@@ -88,7 +90,7 @@ MAIN = f'''<main id="top">
       <div class="x-gallery rv">
           {gallery}
       </div>
-      <p class="x-note">Programme subject to final arrangements.</p>
+      <p class="x-note">Artist&#x27;s impression. Proposed, subject to final arrangements.</p>
     </div>
   </section>
 
@@ -99,7 +101,7 @@ MAIN = f'''<main id="top">
           <div class="eyebrow">Next in the series</div>
           <h2>More evenings, <em>coming soon.</em></h2>
         </div>
-        <p>New experiences are added through the year, each hosted at one of our residences.</p>
+        <p>New experiences are added through the year. Each is hosted at an Accel Collection residence, with seats limited to a small group.</p>
       </div>
       <div class="x-soon">
         <div class="who-card rv"><div class="eyebrow">Experience 02</div><h3>Coming soon</h3><p>Details, venue and dates to be announced.</p><a href="{e(WA_NEXT)}" target="_blank" rel="noopener">Be the first to hear →</a></div>
@@ -112,7 +114,7 @@ MAIN = f'''<main id="top">
     <div class="wrap rv">
       <div class="eyebrow">Private sessions</div>
       <h2>Make it yours. <em>Your guests only.</em></h2>
-      <p>Any of our experiences can be reserved for your own group, from birthdays and anniversaries to client dinners and team evenings. Tell us your date and numbers, and we&#x27;ll arrange it.</p>
+      <p>Any experience can be reserved for your group only. Birthdays, anniversaries, client dinners and team evenings can all be arranged. Share your date and number of guests, and we&#x27;ll plan the programme, menu and transfers with you.</p>
       <div class="btn-row x-center"><a class="btn btn-gold" href="{e(WA_PRIV)}" target="_blank" rel="noopener">Contact us on WhatsApp</a><a class="btn btn-line" style="color:var(--ivory)" href="{e(MAIL_PRIV)}">Email us</a></div>
     </div>
   </section>
