@@ -49,10 +49,10 @@ for root, _, files in os.walk(OUT):
 BOOK_BTN = '<a class="btn btn-gold" href="https://booknow.accelgroup.asia/book">Book now</a>'
 SIGN_IN = '<a href="https://booknow.accelgroup.asia/account" data-member-link>Sign in</a>'
 
-# Google tag. AW = Accel Collections Google Ads account (107-266-8744); G = GA4, once set.
+# Google tag. G = GA4 property for accelgroup.asia (564468279); AW = Accel Collections Google Ads account (107-266-8744).
 # The cookie is shared across *.accelgroup.asia, so a booking paid on booknow.accelgroup.asia
 # is credited to the ad click that landed here. This tag records visits only, never conversions.
-TAG_IDS = ['AW-18573607023']
+TAG_IDS = ['G-XQ0707P9BD', 'AW-18573607023']
 GTAG = ('<script async src="https://www.googletagmanager.com/gtag/js?id=' + TAG_IDS[0] + '"></script>\n'
         "<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());"
         + ''.join("gtag('config','" + i + "',{cookie_domain:'accelgroup.asia',linker:{domains:['collections.accelgroup.asia','booknow.accelgroup.asia','accelgroup.asia']}});" for i in TAG_IDS)
