@@ -44,3 +44,34 @@ for root, _, files in os.walk(OUT):
         old = 'id="sticky" href="#reserve"'
         if old in t:
             open(p, 'w', encoding='utf-8').write(t.replace(old, f'id="sticky" href="{url}"'))
+
+# Member "Sign in" link beside the header "Book now" button.
+BOOK_BTN = '<a class="btn btn-gold" href="https://booknow.accelgroup.asia/book">Book now</a>'
+SIGN_IN = '<a href="https://booknow.accelgroup.asia/account" data-member-link>Sign in</a>'
+
+# Google tag. AW = Accel Collections Google Ads account (107-266-8744); G = GA4, once set.
+# The cookie is shared across *.accelgroup.asia, so a booking paid on booknow.accelgroup.asia
+# is credited to the ad click that landed here. This tag records visits only, never conversions.
+TAG_IDS = ['AW-18573607023']
+GTAG = ('<script async src="https://www.googletagmanager.com/gtag/js?id=' + TAG_IDS[0] + '"></script>\n'
+        "<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());"
+        + ''.join("gtag('config','" + i + "',{cookie_domain:'accelgroup.asia',linker:{domains:['collections.accelgroup.asia','booknow.accelgroup.asia','accelgroup.asia']}});" for i in TAG_IDS)
+        + "</script>\n")
+
+navs = tags = 0
+for root, _, files in os.walk(OUT):
+    for f in files:
+        if not f.endswith('.html'):
+            continue
+        p = os.path.join(root, f)
+        t = open(p, encoding='utf-8').read()
+        u = t
+        if BOOK_BTN in u and 'data-member-link' not in u:
+            u = u.replace(BOOK_BTN, SIGN_IN + '\n      ' + BOOK_BTN, 1); navs += 1
+        if 'googletagmanager.com/gtag/js' not in u:
+            i = u.lower().find('</head>')
+            if i != -1:
+                u = u[:i] + GTAG + u[i:]; tags += 1
+        if u != t:
+            open(p, 'w', encoding='utf-8').write(u)
+print(f'sign-in link added to {navs} page(s); Google tag added to {tags} page(s)')
