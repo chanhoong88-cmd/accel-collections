@@ -30,3 +30,17 @@ for root, _, files in os.walk(OUT):
             t = open(p, encoding='utf-8').read()
             if A in t:
                 open(p, 'w', encoding='utf-8').write(t.replace(A, B))
+
+# The sticky "Reserve a residence" button goes straight to the booking engine,
+# opening on the residence of the page it sits on.
+for root, _, files in os.walk(OUT):
+    for f in files:
+        if not f.endswith('.html'):
+            continue
+        p = os.path.join(root, f)
+        t = open(p, encoding='utf-8').read()
+        slug = os.path.basename(root) if root != OUT else ''
+        url = f'{NEW}/book' + (f'?residence={slug}' if slug in ('the-mansion', 'villa-dani', 'rompin-house') else '')
+        old = 'id="sticky" href="#reserve"'
+        if old in t:
+            open(p, 'w', encoding='utf-8').write(t.replace(old, f'id="sticky" href="{url}"'))
