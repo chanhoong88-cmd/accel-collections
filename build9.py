@@ -29,6 +29,7 @@ WA_PRIV = f'https://wa.me/{WA}?text=' + q(PRIV_MSG)
 MAIL_PRIV = f'mailto:{EMAIL}?subject=' + q('Private experience enquiry') + '&body=' + q(PRIV_MSG)
 WA_TT = f'https://wa.me/{WA}?text=' + q("Hello, I'd like to RSVP early for Tiles & Tea at The Mansion.\nName:\nNumber of guests:")
 WA_NEXT = f'https://wa.me/{WA}?text=' + q("Hello, please let me know when the next Accel Collection experience is announced.")
+WA_NN = f'https://wa.me/{WA}?text=' + q("Hello, I'd like to register my interest in Nyonya Night.\nName:\nNumber of guests:")
 
 # ---- photo slots ----
 os.makedirs(os.path.join(OUT, 'img', 'exp'), exist_ok=True)
@@ -109,7 +110,7 @@ MAIN = f'''<main id="top">
       </div>
       <div class="x-soon">
         <div class="who-card rv"><div class="eyebrow">Dani Hill · The Mansion · Details coming soon</div><h3>Tiles &amp; Tea <em>at The Mansion.</em></h3><p>A Cantonese supper club for twenty guests. Chinese tea and dim sum are served in rounds, followed by mahjong late into the evening. Full details coming soon. RSVP early for early-bird perks.</p><a href="{e(WA_TT)}" target="_blank" rel="noopener">RSVP early on WhatsApp →</a></div>
-        <div class="who-card rv"><div class="eyebrow">To be announced</div><h3><em>Coming soon.</em></h3><p>Details, venue and dates to be announced.</p><a href="{e(WA_NEXT)}" target="_blank" rel="noopener">Be the first to hear →</a></div>
+        <div class="who-card rv"><div class="eyebrow">Venue and dates to be announced</div><h3>Nyonya <em>Night.</em></h3><p>An evening in Peranakan style. Guests dress up in nyonya kebaya for a styled photoshoot, then sit down to authentic nyonya cuisine by a local chef, with live theatre performed in the house. More details coming soon.</p><a href="{e(WA_NN)}" target="_blank" rel="noopener">Be the first to hear →</a></div>
       </div>
     </div>
   </section>
