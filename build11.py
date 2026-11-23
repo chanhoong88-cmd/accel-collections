@@ -93,7 +93,7 @@ STRIP_CSS = '''<style>
 .hl-track{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;scrollbar-width:none;
   padding:0 max(clamp(20px,4vw,48px),calc((100vw - var(--max))/2 + clamp(20px,4vw,48px)));scroll-padding:0 max(clamp(20px,4vw,48px),calc((100vw - var(--max))/2 + clamp(20px,4vw,48px)));outline:none}
 .hl-track::-webkit-scrollbar{display:none}
-.hl-item{position:relative;flex:0 0 clamp(270px,34vw,520px);aspect-ratio:3/2;overflow:hidden;scroll-snap-align:start;background:var(--sand);cursor:zoom-in}
+.hl-item{position:relative;flex:0 0 clamp(240px,24vw,360px);aspect-ratio:3/2;overflow:hidden;scroll-snap-align:start;background:var(--sand);cursor:zoom-in}
 .hl-item img{width:100%;height:100%;object-fit:cover;transition:transform 1.1s ease}
 .hl-item:hover img{transform:scale(1.04)}
 .hl-item>span{position:absolute;left:0;right:0;bottom:0;padding:34px 18px 14px;font-size:12px;letter-spacing:.04em;color:#fff;background:linear-gradient(transparent,rgba(20,16,12,.6));opacity:0;transition:opacity .35s}
@@ -104,7 +104,7 @@ STRIP_CSS = '''<style>
 .hl-more em{font-style:italic;display:block}
 .hl-arrow{font-size:22px;color:var(--gold-soft);transition:transform .3s}
 .hl-more:hover .hl-arrow{transform:translateX(6px)}
-@media (max-width:700px){.hl-btn{display:none}.hl-ctl .btn{margin-left:0;padding:11px 18px}.hl-item{flex-basis:80vw}.hl-item>span{opacity:1}.hl-more{flex-basis:56vw}}
+@media (max-width:700px){.hl-btn{display:none}.hl-ctl .btn{margin-left:0;padding:11px 18px}.hl-item{flex-basis:72vw}.hl-item>span{opacity:1}.hl-more{flex-basis:56vw}}
 </style>
 '''
 STRIP_JS = '''<script>
@@ -188,15 +188,13 @@ header .brand{opacity:1;pointer-events:auto;color:var(--ink)} header .navlinks a
 .g-head .eyebrow{color:var(--muted)}
 .g-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .g-item{display:block;aspect-ratio:3/2;overflow:hidden;background:var(--sand);cursor:zoom-in;scroll-margin-top:120px}
-.g-item:first-child{grid-column:span 2;grid-row:span 2;aspect-ratio:auto}
-.g-item{position:relative}
-.g-item:first-child img{position:absolute;inset:0}
+
 .g-item img{width:100%;height:100%;object-fit:cover;transition:transform 1.1s ease}
 .g-item:hover img{transform:scale(1.04)}
 .lb{position:fixed;inset:0;z-index:200;background:rgba(18,15,12,.96);display:flex;align-items:center;justify-content:center}
 .lb[hidden]{display:none}
 .lb-fig{margin:0;max-width:min(92vw,1800px);display:flex;flex-direction:column;align-items:center}
-.lb-fig img{max-width:100%;max-height:82vh;object-fit:contain;user-select:none}
+.lb-fig img{max-width:min(100%,1000px);max-height:72vh;object-fit:contain;user-select:none}
 .lb-fig figcaption{display:flex;justify-content:space-between;gap:30px;width:100%;margin-top:14px;color:#e9e1d3;font-size:13px;letter-spacing:.03em}
 #lbNum{color:var(--gold-soft);font-size:11px;letter-spacing:.2em;white-space:nowrap}
 .lb-x{position:absolute;top:18px;right:24px;background:none;border:0;color:#fff;font-size:40px;line-height:1;cursor:pointer;opacity:.8}
@@ -206,7 +204,7 @@ header .brand{opacity:1;pointer-events:auto;color:var(--ink)} header .navlinks a
 .lb-p{left:24px}.lb-n{right:24px}
 body.lb-open{overflow:hidden}
 @media (max-width:900px){.g-intro{grid-template-columns:1fr}.g-grid{grid-template-columns:1fr 1fr;gap:10px}.lb-nav{display:none}}
-@media (max-width:560px){.g-grid{grid-template-columns:1fr}.g-item:first-child{grid-column:auto;grid-row:auto;aspect-ratio:3/2}}
+@media (max-width:560px){.g-grid{grid-template-columns:1fr 1fr}}
 </style>
 '''
 G_JS = '''<script>
