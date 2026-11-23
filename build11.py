@@ -16,8 +16,6 @@ def fail(m): print('build11 FAILED: ' + m); sys.exit(1)
 
 # (number, group, caption) — caption doubles as alt text
 PHOTOS = [
-    ('001', 'house', 'Villa Dani, the white A-frame house'),
-    ('002', 'house', 'A bath on the balcony, among the pines'),
     ('003', 'living', 'The lounge at dawn, under the chandelier'),
     ('004', 'living', 'Morning in the lounge'),
     ('005', 'living', 'Tea by the window'),
@@ -37,8 +35,8 @@ PHOTOS = [
     ('018', 'rooms', 'A patterned bathroom'),
     ('019', 'rooms', 'The gold bathroom'),
 ]
-GROUPS = [('house', 'The house <em>and terraces.</em>'), ('living', 'Living <em>and dining.</em>'), ('rooms', 'Bedrooms <em>and baths.</em>')]
-HIGHLIGHTS = ['001', '003', '010', '006', '002', '004', '011', '013', '015', '007', '009', '008']
+GROUPS = [('living', 'Living <em>and dining.</em>'), ('rooms', 'Bedrooms <em>and baths.</em>')]
+HIGHLIGHTS = ['003', '010', '006', '005', '004', '012', '011', '013', '015', '007', '009', '008']
 # focal point for photos cropped into 3:2 tiles (portrait shots)
 POS = {'001': '50% 25%', '003': '50% 62%', '004': '50% 50%', '006': '50% 55%', '007': '50% 60%', '008': '50% 45%', '016': '50% 55%', '019': '50% 60%'}
 
@@ -46,7 +44,7 @@ CAP = {n: c for n, _, c in PHOTOS}
 ORDER = [n for g, _ in GROUPS for n, gg, _ in PHOTOS if gg == g]  # gallery / lightbox order
 for n in CAP:
     for t in 'sl':
-        if not os.path.exists(os.path.join(SRC, f'villa-dani-{n}-{t}.avif')): fail(f'missing villa-dani-{n}-{t}.avif')
+        if not os.path.exists(os.path.join(SRC, f"villa-dani-{n}-{t}.avif")): fail(f'missing villa-dani-{n}-{t}.avif')
 dst = os.path.join(OUT, 'img', 'villa-dani'); os.makedirs(dst, exist_ok=True)
 for f in os.listdir(SRC):
     if f.endswith('.avif'): shutil.copy(os.path.join(SRC, f), os.path.join(dst, f))
@@ -154,7 +152,7 @@ MAIN = f'''<main id="top">
           <h1>Villa Dani, <em>in pictures.</em></h1>
         </div>
         <div class="g-intro-r">
-          <p>{TOTAL} photographs of the house, its lounge, dining room and bedrooms, and the terraces. Select any photo to view it full size.</p>
+          <p>{TOTAL} photographs of the house, its lounge, dining room, bedrooms and bathrooms. Select any photo to view it full size.</p>
           <div class="btn-row"><a class="btn btn-gold" href="/villa-dani/#reserve">Check availability</a><a class="btn btn-line" href="/villa-dani/">Back to Villa Dani</a></div>
         </div>
       </div>
@@ -229,7 +227,7 @@ var h=location.hash.match(/^#p-(\\d+)$/);if(h){var el=document.getElementById('p
 
 TITLE = 'Villa Dani Gallery | Photos of Villa Dani at Dani Hill, Genting Highlands'
 DESC = (f'{TOTAL} photos of Villa Dani at Dani Hill, a private A-frame residence in Genting Highlands: '
-        'the lounge, dining room, cinema room, library corner, bedrooms, bathrooms and balcony bath.')
+        'the lounge, dining room, cinema room, library corner, bedrooms and bathrooms.')
 LD = {"@context": "https://schema.org", "@graph": [
     {"@type": "ImageGallery", "@id": URL + "#gallery", "name": "Villa Dani at Dani Hill: photo gallery", "url": URL,
      "about": {"@id": SITE + "villa-dani/#lodging"},
@@ -245,8 +243,8 @@ g = shell[:m.start()] + MAIN + shell[m.end():]
 g = re.sub(r'<title>.*?</title>', '<title>' + e(TITLE) + '</title>', g, count=1, flags=re.S)
 g = re.sub(r'(<meta (?:name="description"|property="og:description") content=")[^"]*', lambda x: x.group(1) + e(DESC), g)
 g = re.sub(r'(<meta property="og:title" content=")[^"]*', lambda x: x.group(1) + e(TITLE), g)
-g = re.sub(r'(<meta property="og:image" content=")[^"]*', lambda x: x.group(1) + SITE.rstrip('/') + L('001'), g)
-g = re.sub(r'(<meta property="og:image:alt" content=")[^"]*', lambda x: x.group(1) + e(CAP['001']), g)
+g = re.sub(r'(<meta property="og:image" content=")[^"]*', lambda x: x.group(1) + SITE.rstrip('/') + L(ORDER[0]), g)
+g = re.sub(r'(<meta property="og:image:alt" content=")[^"]*', lambda x: x.group(1) + e(CAP[ORDER[0]]), g)
 g = re.sub(r'(<link rel="canonical" href=")[^"]*', lambda x: x.group(1) + URL, g)
 g = re.sub(r'(<meta property="og:url" content=")[^"]*', lambda x: x.group(1) + URL, g)
 g = re.sub(r'<script type="application/ld\+json">.*?</script>',
