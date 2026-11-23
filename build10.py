@@ -124,6 +124,17 @@ shell = open(mp, encoding='utf-8').read()  # unmodified Mansion page = shell for
 anchor = '  <section class="sand" id="retreats">'
 if anchor not in shell: fail('retreats section not found on Mansion page')
 page = shell.replace(anchor, STRIP + anchor, 1)
+# Hero photo: the Mansion and its lawns at dusk (002)
+HERO = '002'
+HERO_ALT = 'The Mansion at Dani Hill at dusk, across the lawn, Genting Highlands'
+HERO_IMG = (f'<img src="{L(HERO)}" srcset="{S(HERO)} 900w, {L(HERO)} 1800w" sizes="100vw" alt="{e(HERO_ALT)}" '
+            f'width="1800" height="1200" fetchpriority="high" decoding="async" style="object-position:52% 62%">')
+page, n = re.subn(r'(<div class="hero-bg">)<img [^>]*>', lambda x: x.group(1) + HERO_IMG, page, count=1)
+if n != 1: fail('Mansion hero image not found')
+page = re.sub(r'<link rel="preload" as="image"[^>]*>',
+              f'<link rel="preload" as="image" href="{L(HERO)}" imagesrcset="{S(HERO)} 900w, {L(HERO)} 1800w" imagesizes="100vw" fetchpriority="high">', page, count=1)
+page = re.sub(r'(<meta property="og:image" content=")[^"]*', lambda x: x.group(1) + SITE.rstrip('/') + L(HERO), page, count=1)
+page = re.sub(r'(<meta property="og:image:alt" content=")[^"]*', lambda x: x.group(1) + e(HERO_ALT), page, count=1)
 i = page.lower().rfind('</head>'); page = page[:i] + STRIP_CSS + page[i:]
 i = page.lower().rfind('</body>'); page = page[:i] + STRIP_JS + page[i:]
 open(mp, 'w', encoding='utf-8').write(page)
